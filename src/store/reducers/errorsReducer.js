@@ -20,7 +20,7 @@ const errorsReducer = (state = initialState, action) => {
     case SET_ERROR:
       const { error } = action;
       const occuredOn = +new Date();
-      return { ...state, error, occuredOn };
+      return { error, occuredOn, showing: true };
     case SHOW_ERROR:
       return { ...state, showing: true };
     case HIDE_ERROR:

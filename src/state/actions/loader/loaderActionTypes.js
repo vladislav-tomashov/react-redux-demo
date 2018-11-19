@@ -1,3 +1,0 @@
-export const RESET_LOADING = "loader/RESET_LOADING";
-export const INCREMENT_LOADING = "loader/INCREMENT_LOADING";
-export const DECREMENT_LOADING = "loader/DECREMENT_LOADING";

@@ -1,5 +1,6 @@
 import {
-  LOAD_CURRENCY_RATES,
+  START_LOADING_CURRENCY_RATES,
+  END_LOADING_CURRENCY_RATES,
   SET_CURRENCY_RATES
 } from "../actions/currencyRates/currencyRatesActionTypes";
 
@@ -9,16 +10,15 @@ const initialState = {
   loading: false
 };
 
-const currencyRatesReducer = (state = initialState, action) => {
-  const { type } = action;
-
+const currencyRatesReducer = (state = initialState, { type, rates }) => {
   switch (type) {
-    case LOAD_CURRENCY_RATES:
+    case START_LOADING_CURRENCY_RATES:
       return { ...state, loading: true };
+    case END_LOADING_CURRENCY_RATES:
+      return { ...state, loading: false };
     case SET_CURRENCY_RATES:
       const updateOn = +new Date();
-      const { rates } = action;
-      return { updateOn, rates, loading: false };
+      return { updateOn, rates };
     default:
       return state;
   }
