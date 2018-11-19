@@ -3,7 +3,7 @@ import {
   SET_ERROR,
   SHOW_ERROR,
   HIDE_ERROR
-} from "../actions/errors/errorsActionTypes";
+} from "../actions/errors/actionTypes";
 
 const initialState = {
   error: null,
