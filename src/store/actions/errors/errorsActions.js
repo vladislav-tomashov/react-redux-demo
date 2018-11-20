@@ -1,4 +1,9 @@
-import { RESET_ERROR, SET_ERROR, SHOW_ERROR, HIDE_ERROR } from "./actionTypes";
+import {
+  RESET_ERROR,
+  SET_ERROR,
+  SHOW_ERROR,
+  HIDE_ERROR
+} from "./errorsActionTypes";
 
 const resetError = () => ({
   type: RESET_ERROR

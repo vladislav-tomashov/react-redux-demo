@@ -1,5 +1,0 @@
-export const START_LOADING_CURRENCY_RATES =
-  "currency-rates/START_LOADING_CURRENCY_RATES";
-export const END_LOADING_CURRENCY_RATES =
-  "currency-rates/END_LOADING_CURRENCY_RATES";
-export const SET_CURRENCY_RATES = "currency-rates/SET_CURRENCY_RATES";
