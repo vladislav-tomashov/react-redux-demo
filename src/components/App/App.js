@@ -20,8 +20,10 @@ class App extends Component {
           >
             Learn React
           </a>
+          <p>
+            <LoadButton />
+          </p>
         </header>
-        <LoadButton />
       </div>
     );
   }

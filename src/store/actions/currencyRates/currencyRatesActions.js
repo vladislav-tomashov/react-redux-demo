@@ -20,7 +20,8 @@ const setCurrencyRatesLoadingError = error => ({
 });
 
 const FETCH_URL =
-  process.env.REACT_APP_CURRENCY_RATES_URL || "www.abcdef.com/rates";
+  process.env.REACT_APP_CURRENCY_RATES_URL ||
+  "https://api.exchangeratesapi.io/latest";
 
 const loadCurrencyRates = () => {
   return async (dispatch, getState) => {
