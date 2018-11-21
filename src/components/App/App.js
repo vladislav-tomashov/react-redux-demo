@@ -1,5 +1,4 @@
 import React from "react";
-// import logo from "../../logo.svg";
 import LoadButton from "../LoadButton/LoadButton";
 import Spinner from "../Spinner/Spinner";
 import CurrencyRates from "../CurrencyRates/CurrencyRates";
@@ -11,7 +10,6 @@ const App = () => (
     <Spinner />
     <div className="App">
       <header className="App-header">
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>

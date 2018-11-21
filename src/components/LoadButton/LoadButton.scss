@@ -1,0 +1,13 @@
+@import "../../styles/settings";
+
+.LoadButton {
+  background: $blue;
+  border: 1px solid $off-white;
+  color: $off-white;
+  display: inline-block;
+  font-size: $font-size-large;
+  font-weight: 300;
+  line-height: 1;
+  padding: $s-size;
+  text-decoration: none;
+}

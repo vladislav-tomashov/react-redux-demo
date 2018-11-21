@@ -5,7 +5,7 @@ import store from "../src/store/createStore";
 import App from "../src/components/App/App";
 import * as serviceWorker from "./serviceWorker";
 
-import "./index.css";
+import "./index.scss";
 
 const target = document.querySelector("#root");
 

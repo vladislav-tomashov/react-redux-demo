@@ -2,50 +2,38 @@ import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import "./LoadButton.css";
 import { loadCurrencyRates } from "../../store/actions/currencyRates/currencyRatesActions";
 import {
   isCurrencyRatesLoading,
   getCurrencyRates
 } from "../../store/selectors/currencyRatesSelectors";
 
-class LoadButton extends React.Component {
-  static propTypes = {
-    loadCurrencyRates: PropTypes.func.isRequired,
-    loading: PropTypes.bool,
-    loaded: PropTypes.bool
-  };
-  constructor(props) {
-    super(props);
-    this.ref = React.createRef();
+import "./LoadButton.scss";
+
+const LoadButton = props => {
+  let label = "Load rates";
+  if (props.loading) {
+    label = "Loading...";
+  } else if (props.loaded) {
+    label = "Update rates";
   }
-  focus = () => {
-    this.ref.current.focus();
-  };
-  onClick = () => {
-    this.props.loadCurrencyRates();
-  };
-  componentDidMount = () => {
-    this.focus();
-  };
-  render = () => {
-    let label = "Load rates";
-    if (this.props.loading) {
-      label = "Loading...";
-    } else if (this.props.loaded) {
-      label = "Update rates";
-    }
-    return (
-      <button
-        disabled={this.props.loading}
-        ref={this.ref}
-        onClick={this.onClick}
-      >
-        {label}
-      </button>
-    );
-  };
-}
+  return (
+    // {!props.loaded && <p>Please press [Load rates] button to get currency rates</p>}
+    <button
+      className="LoadButton"
+      disabled={props.loading}
+      onClick={props.loadCurrencyRates}
+    >
+      {label}
+    </button>
+  );
+};
+
+LoadButton.propTypes = {
+  loadCurrencyRates: PropTypes.func.isRequired,
+  loading: PropTypes.bool,
+  loaded: PropTypes.bool
+};
 
 const mapStateToProps = (state /*, ownProps*/) => {
   return {
