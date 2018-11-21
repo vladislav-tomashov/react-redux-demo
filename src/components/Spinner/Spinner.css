@@ -1,0 +1,23 @@
+.Spinner {
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(150, 150, 150, 0.8);
+}
+
+.Spinner-image {
+  animation: Spinner-image-spin infinite 1s linear;
+  height: 20vmin;
+}
+
+@keyframes Spinner-image-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

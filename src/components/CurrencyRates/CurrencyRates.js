@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import "./CurrencyRates.css";
 import { getCurrencyRatesInfo } from "../../store/selectors/currencyRatesSelectors";
 import CurrencyRatesItem from "../CurrencyRatesItem/CurrencyRatesItem";
+import "./CurrencyRates.css";
 
 class CurrencyRates extends React.PureComponent {
   static propTypes = {
@@ -20,9 +20,8 @@ class CurrencyRates extends React.PureComponent {
     return (
       <React.Fragment>
         <h3>Currency rates</h3>
-        <div>
-          Date: {date}, Base: {this.props.base}
-        </div>
+        <div>Currency rates on: {date}</div>
+        <div>Base currency: {this.props.base}</div>
         <div>
           {Object.entries(this.props.rates).map(([currency, rate]) => {
             return <CurrencyRatesItem key={currency} {...{ currency, rate }} />;
