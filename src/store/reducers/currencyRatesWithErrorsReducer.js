@@ -7,25 +7,25 @@ import {
 import { RESET_ERROR, SET_ERROR } from "../actions/errors/errorsActionTypes";
 import { ERRORS_REDUCER, CURRENCY_RATES_REDUCER } from "./reducerNames";
 
-const currencyRatesWithErrorsReducer = (state, { type, rates, error }) => {
-  switch (type) {
+const currencyRatesWithErrorsReducer = (state, action) => {
+  switch (action.type) {
     case SET_CURRENCY_RATES_LOADING_ERROR:
       return {
-        [CURRENCY_RATES_REDUCER]: currencyRatesReducer(state.currencyRates, {
-          type,
-          error
-        }),
+        [CURRENCY_RATES_REDUCER]: currencyRatesReducer(
+          state.currencyRates,
+          action
+        ),
         [ERRORS_REDUCER]: errorsReducer(state.errors, {
-          type: SET_ERROR,
-          error
+          ...action,
+          type: SET_ERROR
         })
       };
     case SET_CURRENCY_RATES:
       return {
-        [CURRENCY_RATES_REDUCER]: currencyRatesReducer(state.currencyRates, {
-          type,
-          rates
-        }),
+        [CURRENCY_RATES_REDUCER]: currencyRatesReducer(
+          state.currencyRates,
+          action
+        ),
         [ERRORS_REDUCER]: errorsReducer(state.errors, { type: RESET_ERROR })
       };
     default:

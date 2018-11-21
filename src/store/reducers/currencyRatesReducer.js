@@ -5,13 +5,17 @@ import {
 } from "../actions/currencyRates/currencyRatesActionTypes";
 
 const initialState = {
-  updateOn: null,
   rates: null,
+  base: null,
+  date: null,
   loading: false,
   error: null
 };
 
-const currencyRatesReducer = (state = initialState, { type, rates, error }) => {
+const currencyRatesReducer = (
+  state = initialState,
+  { type, rates, base, date, error }
+) => {
   switch (type) {
     case START_LOADING_CURRENCY_RATES:
       return { ...state, loading: true };
@@ -22,8 +26,16 @@ const currencyRatesReducer = (state = initialState, { type, rates, error }) => {
         error
       };
     case SET_CURRENCY_RATES:
+      let newDate;
+      try {
+        newDate = new Date(date);
+      } catch (e) {
+        console.error(e);
+        newDate = new Date();
+      }
       return {
-        updateOn: +new Date(),
+        base,
+        date: newDate,
         rates,
         loading: false,
         error: null

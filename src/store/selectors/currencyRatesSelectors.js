@@ -6,4 +6,9 @@ const isCurrencyRatesLoading = state => getCurrencyRatesState(state).loading;
 
 const getCurrencyRates = state => getCurrencyRatesState(state).rates;
 
-export { isCurrencyRatesLoading, getCurrencyRates };
+const getCurrencyRatesInfo = state => {
+  const { rates, date, base } = getCurrencyRatesState(state);
+  return { rates, date, base };
+};
+
+export { isCurrencyRatesLoading, getCurrencyRates, getCurrencyRatesInfo };

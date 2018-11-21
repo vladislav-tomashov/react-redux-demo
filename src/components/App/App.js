@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import logo from "../../logo.svg";
 import "./App.css";
 import LoadButton from "../LoadButton/LoadButton";
-
+import CurrencyRates from "../CurrencyRates/CurrencyRates";
 class App extends Component {
   render() {
     return (
@@ -23,6 +23,7 @@ class App extends Component {
           <p>
             <LoadButton />
           </p>
+          <CurrencyRates />
         </header>
       </div>
     );

@@ -5,9 +5,11 @@ import {
 } from "./currencyRatesActionTypes";
 import { isCurrencyRatesLoading } from "../../selectors/currencyRatesSelectors";
 
-const setCurrencyRates = rates => ({
+const setCurrencyRates = ({ rates, date, base }) => ({
   type: SET_CURRENCY_RATES,
-  rates
+  rates,
+  date,
+  base
 });
 
 const startLoadingCurrencyRates = () => ({
@@ -30,8 +32,9 @@ const loadCurrencyRates = () => {
     }
     dispatch(startLoadingCurrencyRates());
     try {
-      const rates = await fetch(FETCH_URL);
-      dispatch(setCurrencyRates(rates));
+      const response = await fetch(FETCH_URL);
+      const { date, base, rates } = await response.json();
+      dispatch(setCurrencyRates({ date, base, rates }));
     } catch (error) {
       dispatch(setCurrencyRatesLoadingError(error));
     }
