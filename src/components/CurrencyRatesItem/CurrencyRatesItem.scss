@@ -1,0 +1,19 @@
+@import "../../styles/settings";
+
+.CurrencyRatesItem {
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+  line-height: 1.3;
+  border-bottom-style: dotted;
+  border-bottom-width: 1px;
+  &:hover {
+    background-color: lighten($light-blue, 10%);
+    color: $black;
+    font-weight: 600;
+  }
+}
+
+.CurrencyRatesItem > * {
+  padding: 0 $s-size;
+}

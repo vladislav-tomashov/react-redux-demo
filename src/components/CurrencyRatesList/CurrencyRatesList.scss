@@ -1,0 +1,36 @@
+@import "../../styles/settings";
+
+.CurrencyRates {
+  margin: 0 auto;
+  padding: 0 $m-size;
+}
+
+.CurrencyRates-heading {
+  font-size: $font-size-xlarge;
+  font-weight: 600;
+  color: $light-blue;
+}
+
+.CurrencyRates-info {
+  display: flex;
+  justify-content: space-between;
+  white-space: nowrap;
+  text-align: left;
+}
+
+.CurrencyRates-info > * {
+  padding: 0 $s-size;
+}
+
+.CurrencyRates-header {
+  margin-top: $m-size;
+  background: $light-blue;
+  color: $black;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 $s-size;
+  font-weight: 600;
+}
+.CurrencyRates-body {
+  font-size: $font-size-small;
+}

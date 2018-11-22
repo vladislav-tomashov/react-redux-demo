@@ -3,18 +3,16 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { isCurrencyRatesLoading } from "../../store/selectors/currencyRatesSelectors";
 import spinner from "../../logo.svg";
-import "./Spinner.css";
+import "./Spinner.scss";
 
 const Spinner = ({ loading }) => {
   if (!loading) {
     return null;
   }
   return (
-    <React.Fragment>
-      <div className="Spinner">
-        <img src={spinner} className="Spinner-image" alt="Loading..." />
-      </div>
-    </React.Fragment>
+    <div className="Spinner">
+      <img src={spinner} className="Spinner-image" alt="Loading..." />
+    </div>
   );
 };
 

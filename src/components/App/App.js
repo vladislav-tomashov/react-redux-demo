@@ -1,31 +1,20 @@
 import React from "react";
 import LoadButton from "../LoadButton/LoadButton";
 import Spinner from "../Spinner/Spinner";
-import CurrencyRates from "../CurrencyRates/CurrencyRates";
+import CurrencyRatesList from "../CurrencyRatesList/CurrencyRatesList";
+import ErrorPopup from "../ErrorPopup/ErrorPopup";
 
-import "./App.css";
+import "./App.scss";
 
 const App = () => (
   <React.Fragment>
     <Spinner />
+    <ErrorPopup />
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <p>
-          <LoadButton />
-        </p>
-        <CurrencyRates />
-      </header>
+      <p>
+        <LoadButton />
+      </p>
+      <CurrencyRatesList />
     </div>
   </React.Fragment>
 );

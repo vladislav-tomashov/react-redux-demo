@@ -18,7 +18,6 @@ const LoadButton = props => {
     label = "Update rates";
   }
   return (
-    // {!props.loaded && <p>Please press [Load rates] button to get currency rates</p>}
     <button
       className="LoadButton"
       disabled={props.loading}
