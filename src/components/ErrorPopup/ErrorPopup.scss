@@ -1,24 +1,31 @@
 @import "../../styles/settings";
+@import "../LoadButton/LoadButton.scss";
 
-.box-layout {
+.Overlay {
   align-items: center;
-  // background: url("/images/bg.jpg");
-  // background-size: cover;
   display: flex;
-  height: 100vh;
   justify-content: center;
-  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba($black, 0.6);
 }
 
-.box-layout__box {
-  background: fade-out(white, 0.15);
+.Modal {
+  background: white;
   border-radius: 3px;
   padding: $l-size $m-size;
   text-align: center;
   width: 25rem;
 }
 
-.box-layout__title {
+.Modal-button {
+  @extend .LoadButton;
+}
+
+.Modal-title {
   margin: 0 0 $m-size 0;
   line-height: 1;
 }
