@@ -14,12 +14,12 @@ const ErrorPopup = props => (
   <Modal
     isOpen={props.isShowingError}
     ariaHideApp={false}
-    className="Modal"
-    overlayClassName="Overlay"
+    className="ErrorPopup-modal"
+    overlayClassName="ErrorPopup-overlay"
   >
-    <h3>Error</h3>
-    {props.error && <p>{props.error.toString()}</p>}
-    <button className="Modal-button" onClick={props.hideError}>
+    <div className="ErrorPopup-title">Error</div>
+    {props.error && <p className="ErrorPopup-text">{props.error.toString()}</p>}
+    <button className="ErrorPopup-button" onClick={props.hideError}>
       Ok
     </button>
   </Modal>

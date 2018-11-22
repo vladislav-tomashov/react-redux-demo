@@ -1,7 +1,7 @@
 @import "../../styles/settings";
 @import "../LoadButton/LoadButton.scss";
 
-.Overlay {
+.ErrorPopup-overlay {
   align-items: center;
   display: flex;
   justify-content: center;
@@ -13,7 +13,7 @@
   background-color: rgba($black, 0.6);
 }
 
-.Modal {
+.ErrorPopup-modal {
   background: white;
   border-radius: 3px;
   padding: $l-size $m-size;
@@ -21,11 +21,21 @@
   width: 25rem;
 }
 
-.Modal-button {
-  @extend .LoadButton;
+.ErrorPopup-text {
+  font-size: $font-size-small;
+  line-height: 1;
 }
 
-.Modal-title {
+.ErrorPopup-button {
+  @extend .LoadButton;
+  font-weight: 600;
+  font-size: 1.4rem;
+  padding: 1rem;
+}
+
+.ErrorPopup-title {
   margin: 0 0 $m-size 0;
   line-height: 1;
+  font-size: $font-size-xlarge;
+  font-weight: 700;
 }

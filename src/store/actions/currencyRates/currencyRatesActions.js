@@ -32,7 +32,9 @@ const loadCurrencyRates = () => {
     }
     dispatch(startLoadingCurrencyRates());
     try {
-      throw new Error("Just test error");
+      throw new Error(
+        "Just test error Just test error Just test error Just test error Just test error Just test error Just test error Just test error Just test error Just test error Just test error Just test error "
+      );
       const response = await fetch(FETCH_URL);
       const { date, base, rates } = await response.json();
       dispatch(setCurrencyRates({ date, base, rates }));
