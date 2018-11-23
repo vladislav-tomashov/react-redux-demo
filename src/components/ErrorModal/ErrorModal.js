@@ -8,24 +8,26 @@ import {
   isShowingError,
   getError
 } from "../../store/selectors/errorsSelectors";
-import "./ErrorPopup.scss";
+import "./ErrorModal.scss";
 
-const ErrorPopup = props => (
+const ErrorModal = props => (
   <Modal
     isOpen={props.isShowingError}
     ariaHideApp={false}
-    className="ErrorPopup-modal"
-    overlayClassName="ErrorPopup-overlay"
+    className="ErrorModal-modal"
+    overlayClassName="ErrorModal-overlay"
+    onRequestClose={props.hideError}
+    contentLabel="Error Modal"
   >
-    <div className="ErrorPopup-title">Error</div>
-    {props.error && <p className="ErrorPopup-text">{props.error.toString()}</p>}
-    <button className="ErrorPopup-button" onClick={props.hideError}>
+    <div className="ErrorModal-title">Error</div>
+    {props.error && <p className="ErrorModal-text">{props.error.toString()}</p>}
+    <button className="ErrorModal-button" onClick={props.hideError}>
       Ok
     </button>
   </Modal>
 );
 
-ErrorPopup.propTypes = {
+ErrorModal.propTypes = {
   isShowingError: PropTypes.bool.isRequired,
   error: PropTypes.any,
   hideError: PropTypes.func.isRequired
@@ -41,9 +43,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ hideError }, dispatch);
 
-const ConnectedErrorPopup = connect(
+const ConnectedErrorModal = connect(
   mapStateToProps,
   mapDispatchToProps
-)(ErrorPopup);
+)(ErrorModal);
 
-export { ConnectedErrorPopup as default, ErrorPopup };
+export { ConnectedErrorModal as default, ErrorModal };

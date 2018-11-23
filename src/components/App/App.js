@@ -2,14 +2,14 @@ import React from "react";
 import LoadButton from "../LoadButton/LoadButton";
 import Spinner from "../Spinner/Spinner";
 import CurrencyRatesList from "../CurrencyRatesList/CurrencyRatesList";
-import ErrorPopup from "../ErrorPopup/ErrorPopup";
+import ErrorModal from "../ErrorModal/ErrorModal";
 
 import "./App.scss";
 
 const App = () => (
   <React.Fragment>
     <Spinner />
-    <ErrorPopup />
+    <ErrorModal />
     <div className="App">
       <p>
         <LoadButton />
