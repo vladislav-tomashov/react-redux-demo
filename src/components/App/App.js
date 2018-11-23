@@ -3,6 +3,7 @@ import LoadButton from "../LoadButton/LoadButton";
 import Spinner from "../Spinner/Spinner";
 import CurrencyRatesList from "../CurrencyRatesList/CurrencyRatesList";
 import ErrorModal from "../ErrorModal/ErrorModal";
+import "normalize.css/normalize.css";
 
 import "./App.scss";
 

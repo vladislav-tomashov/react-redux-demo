@@ -5,6 +5,7 @@
   "description": "Demo of React application with Redux",
   "author": "Vladislav Tomashov",
   "dependencies": {
+    "normalize.css": "^8.0.1",
     "numeral": "^2.0.6",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
