@@ -2,7 +2,7 @@ import {
   START_LOADING_CURRENCY_RATES,
   SET_CURRENCY_RATES_LOADING_ERROR,
   SET_CURRENCY_RATES
-} from "../actions/currencyRates/currencyRatesActionTypes";
+} from "../actions/currencyRates/currencyRatesActions";
 
 const initialState = {
   rates: null,

@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { getCurrencyRatesInfo } from "../../store/selectors/currencyRatesSelectors";
+import { getCurrencyRatesData } from "../../store/selectors/currencyRatesSelectors";
 import CurrencyRatesItem from "../CurrencyRatesItem/CurrencyRatesItem";
 
 import "./CurrencyRatesList.scss";
@@ -41,7 +41,7 @@ CurrencyRatesList.propTypes = {
 };
 
 const mapStateToProps = (state /*, ownProps*/) => {
-  return getCurrencyRatesInfo(state);
+  return getCurrencyRatesData(state);
 };
 
 const ConnectedCurrencyRatesList = connect(mapStateToProps)(CurrencyRatesList);

@@ -1,25 +1,4 @@
-import {
-  RESET_ERROR,
-  SET_ERROR,
-  SHOW_ERROR,
-  HIDE_ERROR
-} from "./errorsActionTypes";
-
-const resetError = () => ({
-  type: RESET_ERROR
-});
-
-const setError = error => ({
-  type: SET_ERROR,
-  error
-});
-
-const showError = () => ({
-  type: SHOW_ERROR
-});
-
-const hideError = () => ({
-  type: HIDE_ERROR
-});
-
-export { resetError, setError, showError, hideError };
+export const RESET_ERROR = "errors/RESET_ERROR";
+export const SET_ERROR = "errors/SET_ERROR";
+export const SHOW_ERROR = "errors/SHOW_ERROR";
+export const HIDE_ERROR = "errors/HIDE_ERROR";

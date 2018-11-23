@@ -4,11 +4,11 @@ const getCurrencyRatesState = state => state[CURRENCY_RATES_REDUCER];
 
 const isCurrencyRatesLoading = state => getCurrencyRatesState(state).loading;
 
-const getCurrencyRates = state => getCurrencyRatesState(state).rates;
+const wasCurrencyRatesLoaded = state => !!getCurrencyRatesState(state).rates;
 
-const getCurrencyRatesInfo = state => {
+const getCurrencyRatesData = state => {
   const { rates, date, base } = getCurrencyRatesState(state);
   return { rates, date, base };
 };
 
-export { isCurrencyRatesLoading, getCurrencyRates, getCurrencyRatesInfo };
+export { isCurrencyRatesLoading, wasCurrencyRatesLoaded, getCurrencyRatesData };

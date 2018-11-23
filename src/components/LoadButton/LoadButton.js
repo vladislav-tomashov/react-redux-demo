@@ -2,10 +2,10 @@ import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { loadCurrencyRates } from "../../store/actions/currencyRates/currencyRatesActions";
+import { loadCurrencyRates } from "../../store/actions/currencyRates/currencyRatesActionCreators";
 import {
   isCurrencyRatesLoading,
-  getCurrencyRates
+  wasCurrencyRatesLoaded
 } from "../../store/selectors/currencyRatesSelectors";
 
 import "./LoadButton.scss";
@@ -37,7 +37,7 @@ LoadButton.propTypes = {
 const mapStateToProps = (state /*, ownProps*/) => {
   return {
     loading: isCurrencyRatesLoading(state),
-    loaded: !!getCurrencyRates(state)
+    loaded: wasCurrencyRatesLoaded(state)
   };
 };
 

@@ -3,16 +3,16 @@ import Modal from "react-modal";
 import { bindActionCreators } from "redux";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { hideError } from "../../store/actions/errors/errorsActions";
+import { hideError } from "../../store/actions/errors/errorsActionCreators";
 import {
-  isShowingError,
+  isErrorShowing,
   getError
 } from "../../store/selectors/errorsSelectors";
 import "./ErrorModal.scss";
 
 const ErrorModal = props => (
   <Modal
-    isOpen={props.isShowingError}
+    isOpen={props.isErrorShowing}
     ariaHideApp={false}
     className="ErrorModal-modal"
     overlayClassName="ErrorModal-overlay"
@@ -28,14 +28,14 @@ const ErrorModal = props => (
 );
 
 ErrorModal.propTypes = {
-  isShowingError: PropTypes.bool.isRequired,
+  isErrorShowing: PropTypes.bool.isRequired,
   error: PropTypes.any,
   hideError: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {
   return {
-    isShowingError: isShowingError(state),
+    isErrorShowing: isErrorShowing(state),
     error: getError(state)
   };
 };
