@@ -5,7 +5,7 @@ import { isCurrencyRatesLoading } from "../../store/selectors/currencyRatesSelec
 import { ReactComponent as Logo } from "./logo.svg";
 import "./Spinner.scss";
 
-const Spinner = ({ loading }) => {
+const Spinner = ({ loading = false } = {}) => {
   if (!loading) {
     return null;
   }
@@ -17,7 +17,7 @@ const Spinner = ({ loading }) => {
 };
 
 Spinner.propTypes = {
-  loading: PropTypes.bool.isRequired
+  loading: PropTypes.bool
 };
 
 const mapStateToProps = state => {

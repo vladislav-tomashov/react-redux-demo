@@ -4,16 +4,13 @@ import { Provider } from "react-redux";
 import store from "../src/store/createStore";
 import App from "../src/components/App/App";
 import * as serviceWorker from "./serviceWorker";
-
 import "./index.scss";
-
-const target = document.querySelector("#root");
 
 render(
   <Provider store={store}>
     <App />
   </Provider>,
-  target
+  document.querySelector("#root")
 );
 
 // If you want your app to work offline and load faster, you can change

@@ -7,21 +7,24 @@ import {
   isCurrencyRatesLoading,
   wasCurrencyRatesLoaded
 } from "../../store/selectors/currencyRatesSelectors";
-
 import "./LoadButton.scss";
 
-const LoadButton = props => {
+const LoadButton = ({
+  loading = false,
+  loaded = false,
+  loadCurrencyRates = () => {}
+} = {}) => {
   let label = "Load rates";
-  if (props.loading) {
+  if (loading) {
     label = "Loading...";
-  } else if (props.loaded) {
+  } else if (loaded) {
     label = "Update rates";
   }
   return (
     <button
       className="LoadButton"
-      disabled={props.loading}
-      onClick={props.loadCurrencyRates}
+      disabled={loading}
+      onClick={loadCurrencyRates}
     >
       {label}
     </button>
@@ -29,7 +32,7 @@ const LoadButton = props => {
 };
 
 LoadButton.propTypes = {
-  loadCurrencyRates: PropTypes.func.isRequired,
+  loadCurrencyRates: PropTypes.func,
   loading: PropTypes.bool,
   loaded: PropTypes.bool
 };

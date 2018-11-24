@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoadButton component should render LoadButton correctly 1`] = `
+<button
+  className="LoadButton"
+  disabled={false}
+  onClick={[Function]}
+>
+  Load rates
+</button>
+`;
+
+exports[`LoadButton component should render LoadButton with 'loaded' props correctly 1`] = `
+<button
+  className="LoadButton"
+  disabled={false}
+  onClick={[Function]}
+>
+  Update rates
+</button>
+`;
+
+exports[`LoadButton component should render LoadButton with 'loading' props correctly 1`] = `
+<button
+  className="LoadButton"
+  disabled={true}
+  onClick={[Function]}
+>
+  Loading...
+</button>
+`;
+
+exports[`LoadButton component should render LoadButton with all props correctly 1`] = `
+<button
+  className="LoadButton"
+  disabled={false}
+  onClick={[MockFunction]}
+>
+  Update rates
+</button>
+`;

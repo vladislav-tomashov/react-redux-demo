@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Spinner component should render Spinner correctly 1`] = `""`;
+
+exports[`Spinner component should render Spinner with 'loading' props correctly 1`] = `
+<div
+  className="Spinner"
+>
+  <ReactComponent
+    className="Spinner-image"
+  />
+</div>
+`;
