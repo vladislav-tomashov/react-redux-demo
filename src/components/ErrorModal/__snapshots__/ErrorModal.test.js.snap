@@ -2,7 +2,7 @@
 
 exports[`ErrorModal component should render ErrorModal correctly 1`] = `
 <Modal
-  ariaHideApp={false}
+  ariaHideApp={true}
   bodyOpenClassName="ReactModal__Body--open"
   className="ErrorModal-modal"
   closeTimeoutMS={0}
@@ -34,7 +34,7 @@ exports[`ErrorModal component should render ErrorModal correctly 1`] = `
 
 exports[`ErrorModal component should render ErrorModal with all props correctly 1`] = `
 <Modal
-  ariaHideApp={false}
+  ariaHideApp={true}
   bodyOpenClassName="ReactModal__Body--open"
   className="ErrorModal-modal"
   closeTimeoutMS={0}

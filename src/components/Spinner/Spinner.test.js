@@ -2,9 +2,9 @@ import React from "react";
 import { shallow } from "enzyme";
 import { Spinner } from "./Spinner";
 
-let wrapper;
-
 describe("Spinner component", () => {
+  let wrapper;
+
   beforeEach(() => {
     wrapper = shallow(<Spinner />);
   });

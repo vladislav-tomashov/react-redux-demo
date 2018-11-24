@@ -1,6 +1,62 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CurrencyRatesList component should render CurrencyRatesList correctly 1`] = `
+exports[`CurrencyRatesList component should render CurrencyRatesList correctly with provided values 1`] = `
+<div
+  className="CurrencyRates"
+>
+  <div
+    className="CurrencyRates-heading"
+  >
+    Currency rates
+  </div>
+  <div
+    className="CurrencyRates-info"
+  >
+    <span>
+      Currency rates for:
+    </span>
+    <span>
+      December 31, 2018
+    </span>
+  </div>
+  <div
+    className="CurrencyRates-info"
+  >
+    <span>
+      Base currency:
+    </span>
+    <span>
+      ABC
+    </span>
+  </div>
+  <div
+    className="CurrencyRates-header"
+  >
+    <div>
+      Currency
+    </div>
+    <div>
+      Rate
+    </div>
+  </div>
+  <div
+    className="CurrencyRates-body"
+  >
+    <CurrencyRatesItem
+      currency="USD"
+      key="USD"
+      rate={0.12345}
+    />
+    <CurrencyRatesItem
+      currency="BCD"
+      key="BCD"
+      rate={123.456}
+    />
+  </div>
+</div>
+`;
+
+exports[`CurrencyRatesList component should render empty CurrencyRatesList correctly 1`] = `
 <div
   className="CurrencyRates"
 >

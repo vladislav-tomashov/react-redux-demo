@@ -16,7 +16,6 @@ const ErrorModal = ({
 } = {}) => (
   <Modal
     isOpen={isOpen}
-    ariaHideApp={false}
     className="ErrorModal-modal"
     overlayClassName="ErrorModal-overlay"
     onRequestClose={onCloseModal}

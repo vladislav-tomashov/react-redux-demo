@@ -3,9 +3,9 @@ import { shallow } from "enzyme";
 import { LoadButton } from "./LoadButton";
 import { LOADING, LOADED } from "./requestStatuses";
 
-let wrapper;
-
 describe("LoadButton component", () => {
+  let wrapper;
+
   beforeEach(() => {
     const props = {
       makeRequest: jest.fn()
