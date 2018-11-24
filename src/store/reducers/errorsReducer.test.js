@@ -20,7 +20,7 @@ describe("errors reducer", () => {
       reducer(
         {
           showing: false,
-          error: "abc"
+          error: null
         },
         { type: SET_ERROR, error }
       )
