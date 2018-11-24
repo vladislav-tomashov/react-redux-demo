@@ -88,11 +88,11 @@ describe("currency rates sync actions", () => {
 });
 
 describe("currency rates async actions", () => {
-  const defaultCurrencyRatesState = {};
-  const defaultErrorsState = {};
-  const storeDefaultState = {
-    [CURRENCY_RATES_REDUCER]: defaultCurrencyRatesState,
-    [ERRORS_REDUCER]: defaultErrorsState
+  const initialCurrencyRatesState = {};
+  const initialErrorsState = {};
+  const storeInitialState = {
+    [CURRENCY_RATES_REDUCER]: initialCurrencyRatesState,
+    [ERRORS_REDUCER]: initialErrorsState
   };
 
   beforeEach(() => {
@@ -109,7 +109,7 @@ describe("currency rates async actions", () => {
       { type: START_LOADING_CURRENCY_RATES },
       { type: SET_CURRENCY_RATES, rates, base, date }
     ];
-    const store = mockStore(storeDefaultState);
+    const store = mockStore(storeInitialState);
 
     await store.dispatch(loadCurrencyRates());
 
@@ -126,7 +126,7 @@ describe("currency rates async actions", () => {
       { type: START_LOADING_CURRENCY_RATES },
       { type: SET_CURRENCY_RATES_LOADING_ERROR, error }
     ];
-    const store = mockStore(storeDefaultState);
+    const store = mockStore(storeInitialState);
 
     await store.dispatch(loadCurrencyRates());
 
