@@ -10,27 +10,31 @@ import {
 } from "../../store/selectors/errorsSelectors";
 import "./ErrorModal.scss";
 
-const ErrorModal = props => (
+const ErrorModal = ({
+  isErrorShowing = false,
+  hideError = () => {},
+  error = null
+} = {}) => (
   <Modal
-    isOpen={props.isErrorShowing}
+    isOpen={isErrorShowing}
     ariaHideApp={false}
     className="ErrorModal-modal"
     overlayClassName="ErrorModal-overlay"
-    onRequestClose={props.hideError}
+    onRequestClose={hideError}
     contentLabel="Error Modal"
   >
     <div className="ErrorModal-title">Error</div>
-    {props.error && <p className="ErrorModal-text">{props.error.toString()}</p>}
-    <button className="ErrorModal-button" onClick={props.hideError}>
+    {error && <p className="ErrorModal-text">{error.toString()}</p>}
+    <button className="ErrorModal-button" onClick={hideError}>
       Ok
     </button>
   </Modal>
 );
 
 ErrorModal.propTypes = {
-  isErrorShowing: PropTypes.bool.isRequired,
+  isErrorShowing: PropTypes.bool,
   error: PropTypes.any,
-  hideError: PropTypes.func.isRequired
+  hideError: PropTypes.func
 };
 
 const mapStateToProps = state => {
