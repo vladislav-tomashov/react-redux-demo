@@ -14,22 +14,22 @@ describe("ErrorModal component", () => {
   });
 
   test("should render ErrorModal with all props correctly", () => {
-    const hideError = jest.fn();
+    const onCloseModal = jest.fn();
     wrapper.setProps({
-      isErrorShowing: true,
-      hideError,
+      isOpen: true,
+      onCloseModal,
       error: new Error("test error")
     });
     expect(wrapper).toMatchSnapshot();
   });
   test("should handle OK button click", () => {
-    const hideError = jest.fn();
+    const onCloseModal = jest.fn();
     wrapper.setProps({
-      isErrorShowing: true,
-      hideError,
+      isOpen: true,
+      onCloseModal,
       error: new Error("test error")
     });
     wrapper.find("button").simulate("click");
-    expect(hideError).toBeCalledTimes(1);
+    expect(onCloseModal).toBeCalledTimes(1);
   });
 });

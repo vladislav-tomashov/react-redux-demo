@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CurrencyRatesList component should render CurrencyRatesList correctly 1`] = `
+<div
+  className="CurrencyRates"
+>
+  <span>
+    Please press [Load rates] button to get currency rates
+  </span>
+</div>
+`;

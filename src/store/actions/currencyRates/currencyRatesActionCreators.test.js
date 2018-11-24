@@ -1,4 +1,5 @@
 import configureMockStore from "redux-mock-store";
+import moment from "moment";
 import thunk from "redux-thunk";
 import {
   setCurrencyRates,
@@ -107,7 +108,7 @@ describe("currency rates async actions", () => {
     const { rates, date, base } = testDataCurrencyRates;
     const expectedActions = [
       { type: START_LOADING_CURRENCY_RATES },
-      { type: SET_CURRENCY_RATES, rates, base, date }
+      { type: SET_CURRENCY_RATES, rates, base, date: moment(date).toDate() }
     ];
     const store = mockStore(storeInitialState);
 

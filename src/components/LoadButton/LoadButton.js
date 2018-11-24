@@ -1,5 +1,4 @@
 import React from "react";
-import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { loadCurrencyRates } from "../../store/actions/currencyRates/currencyRatesActionCreators";
@@ -7,13 +6,12 @@ import {
   isCurrencyRatesLoading,
   wasCurrencyRatesLoaded
 } from "../../store/selectors/currencyRatesSelectors";
+import { LOADING, LOADED, NOTDONE } from "./requestStatuses";
 import "./LoadButton.scss";
 
-const LoadButton = ({
-  loading = false,
-  loaded = false,
-  loadCurrencyRates = () => {}
-} = {}) => {
+const LoadButton = ({ requestStatus, makeRequest }) => {
+  const loading = requestStatus === LOADING;
+  const loaded = requestStatus === LOADED;
   let label = "Load rates";
   if (loading) {
     label = "Loading...";
@@ -21,31 +19,34 @@ const LoadButton = ({
     label = "Update rates";
   }
   return (
-    <button
-      className="LoadButton"
-      disabled={loading}
-      onClick={loadCurrencyRates}
-    >
+    <button className="LoadButton" disabled={loading} onClick={makeRequest}>
       {label}
     </button>
   );
 };
 
 LoadButton.propTypes = {
-  loadCurrencyRates: PropTypes.func,
-  loading: PropTypes.bool,
-  loaded: PropTypes.bool
+  makeRequest: PropTypes.func.isRequired,
+  requestStatus: PropTypes.oneOf([LOADING, LOADED, NOTDONE])
 };
 
 const mapStateToProps = (state /*, ownProps*/) => {
+  let requestStatus;
+  if (isCurrencyRatesLoading(state)) {
+    requestStatus = LOADING;
+  } else if (wasCurrencyRatesLoaded(state)) {
+    requestStatus = LOADED;
+  }
   return {
-    loading: isCurrencyRatesLoading(state),
-    loaded: wasCurrencyRatesLoaded(state)
+    requestStatus
   };
 };
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ loadCurrencyRates }, dispatch);
+const mapDispatchToProps = dispatch => {
+  return {
+    makeRequest: () => dispatch(loadCurrencyRates())
+  };
+};
 
 const ConnectedLoadButton = connect(
   mapStateToProps,

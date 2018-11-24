@@ -1,12 +1,16 @@
 import React from "react";
 import { shallow } from "enzyme";
 import { LoadButton } from "./LoadButton";
+import { LOADING, LOADED } from "./requestStatuses";
 
 let wrapper;
 
 describe("LoadButton component", () => {
   beforeEach(() => {
-    wrapper = shallow(<LoadButton />);
+    const props = {
+      makeRequest: jest.fn()
+    };
+    wrapper = shallow(<LoadButton {...props} />);
   });
 
   test("should render LoadButton correctly", () => {
@@ -15,33 +19,31 @@ describe("LoadButton component", () => {
 
   test("should render LoadButton with 'loading' props correctly", () => {
     wrapper.setProps({
-      loading: true
+      requestStatus: LOADING
     });
     expect(wrapper).toMatchSnapshot();
   });
   test("should render LoadButton with 'loaded' props correctly", () => {
     wrapper.setProps({
-      loaded: true
+      requestStatus: LOADED
     });
     expect(wrapper).toMatchSnapshot();
   });
   test("should render LoadButton with all props correctly", () => {
-    const loadCurrencyRates = jest.fn();
+    const makeRequest = jest.fn();
     wrapper.setProps({
-      loading: false,
-      loaded: true,
-      loadCurrencyRates
+      requestStatus: LOADED,
+      makeRequest
     });
     expect(wrapper).toMatchSnapshot();
   });
   test("should handle button click", () => {
-    const loadCurrencyRates = jest.fn();
+    const makeRequest = jest.fn();
     wrapper.setProps({
-      loading: false,
-      loaded: true,
-      loadCurrencyRates
+      requestStatus: LOADED,
+      makeRequest
     });
     wrapper.find("button").simulate("click");
-    expect(loadCurrencyRates).toBeCalledTimes(1);
+    expect(makeRequest).toBeCalledTimes(1);
   });
 });

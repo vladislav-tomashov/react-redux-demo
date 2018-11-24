@@ -1,3 +1,4 @@
+import moment from "moment";
 import {
   SET_CURRENCY_RATES,
   SET_CURRENCY_RATES_LOADING_ERROR,
@@ -34,7 +35,16 @@ const loadCurrencyRates = () => {
     try {
       const response = await fetch(FETCH_URL);
       const { date, base, rates } = await response.json();
-      dispatch(setCurrencyRates({ date, base, rates }));
+      const momentDate = moment(date);
+      if (!momentDate.isValid()) {
+        throw new Error(`Invalid date: ${date}`);
+      }
+      Object.values(rates).forEach(rate => {
+        if (typeof rate !== "number") {
+          throw new Error(`Conversion error: rate is not a number ${rate}`);
+        }
+      });
+      dispatch(setCurrencyRates({ date: momentDate.toDate(), base, rates }));
     } catch (error) {
       dispatch(setCurrencyRatesLoadingError(error));
     }
