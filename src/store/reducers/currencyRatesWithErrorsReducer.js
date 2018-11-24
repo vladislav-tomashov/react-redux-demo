@@ -3,8 +3,8 @@ import currencyRatesReducer from "./currencyRatesReducer";
 import {
   SET_CURRENCY_RATES_LOADING_ERROR,
   SET_CURRENCY_RATES
-} from "../actions/currencyRates/currencyRatesActions";
-import { RESET_ERROR, SET_ERROR } from "../actions/errors/errorsActions";
+} from "../actions/currencyRates/currencyRatesActionTypes";
+import { RESET_ERROR, SET_ERROR } from "../actions/errors/errorsActionTypes";
 import { ERRORS_REDUCER, CURRENCY_RATES_REDUCER } from "./reducerNames";
 
 const currencyRatesWithErrorsReducer = (state, action) => {

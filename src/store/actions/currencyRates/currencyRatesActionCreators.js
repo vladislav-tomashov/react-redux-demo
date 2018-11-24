@@ -2,7 +2,7 @@ import {
   SET_CURRENCY_RATES,
   SET_CURRENCY_RATES_LOADING_ERROR,
   START_LOADING_CURRENCY_RATES
-} from "./currencyRatesActions";
+} from "./currencyRatesActionTypes";
 import { isCurrencyRatesLoading } from "../../selectors/currencyRatesSelectors";
 
 const setCurrencyRates = ({ rates, date, base }) => ({

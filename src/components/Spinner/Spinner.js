@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { isCurrencyRatesLoading } from "../../store/selectors/currencyRatesSelectors";
-import spinner from "./logo.svg";
+import { ReactComponent as Logo } from "./logo.svg";
 import "./Spinner.scss";
 
 const Spinner = ({ loading }) => {
@@ -11,7 +11,7 @@ const Spinner = ({ loading }) => {
   }
   return (
     <div className="Spinner">
-      <img src={spinner} className="Spinner-image" alt="Loading..." />
+      <Logo className="Spinner-image" />
     </div>
   );
 };

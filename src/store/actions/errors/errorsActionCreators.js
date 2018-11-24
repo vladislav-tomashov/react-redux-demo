@@ -3,7 +3,7 @@ import {
   SET_ERROR,
   SHOW_ERROR,
   HIDE_ERROR
-} from "./errorsActions";
+} from "./errorsActionTypes";
 
 const resetError = () => ({
   type: RESET_ERROR
