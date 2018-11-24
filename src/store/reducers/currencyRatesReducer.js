@@ -26,16 +26,9 @@ const currencyRatesReducer = (
         error
       };
     case SET_CURRENCY_RATES:
-      let newDate;
-      try {
-        newDate = new Date(date);
-      } catch (e) {
-        console.error(e);
-        newDate = new Date();
-      }
       return {
         base,
-        date: newDate,
+        date,
         rates,
         loading: false,
         error: null
