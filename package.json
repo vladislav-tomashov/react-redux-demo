@@ -2,7 +2,7 @@
   "name": "react-redux-demo",
   "version": "0.1.0",
   "private": true,
-  "description": "Demo of React application with Redux state managent",
+  "description": "Simple currency rates SPA application which is made using React framework together with Redux state managent system",
   "author": "Vladislav Tomashov",
   "email": "vladislav.tomashov@gmail.com",
   "repository": {

@@ -60,15 +60,32 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe("currency rates sync actions", () => {
-  test("should create an action to set currency rates with provided values", () => {
+  test("should create an action to set currency rates with correct provided values", () => {
     const { rates, date, base } = testDataCurrencyRates;
+    const convertedDate = new Date(date);
     const action = setCurrencyRates({ rates, date, base });
     expect(action).toEqual({
       type: SET_CURRENCY_RATES,
       rates,
-      date,
+      date: convertedDate,
       base
     });
+  });
+
+  test("should not create an action and to throw Error when date is invalid", () => {
+    expect.assertions(1);
+    const { rates, base } = testDataCurrencyRates;
+    const date = "2018-11-abc";
+    expect(() => setCurrencyRates({ rates, date, base })).toThrow();
+  });
+
+  test("should not create an action and to throw Error when one of rates is invalid", () => {
+    expect.assertions(1);
+    const { date, base } = testDataCurrencyRates;
+    const rates = {
+      ABC: "abc"
+    };
+    expect(() => setCurrencyRates({ rates, date, base })).toThrow();
   });
 
   test("should create an action that currency rates loading is started", () => {
@@ -108,7 +125,7 @@ describe("currency rates async actions", () => {
     const { rates, date, base } = testDataCurrencyRates;
     const expectedActions = [
       { type: START_LOADING_CURRENCY_RATES },
-      { type: SET_CURRENCY_RATES, rates, base, date: moment(date).toDate() }
+      { type: SET_CURRENCY_RATES, rates, base, date: moment.utc(date).toDate() }
     ];
     const store = mockStore(storeInitialState);
 

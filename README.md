@@ -1,3 +1,20 @@
+# Simple currency rates SPA application made with React and Redux
+
+This simple currency rates SPA application made using React framework together with Redux state managent system.
+
+## Requirements
+
+- Application is using data from https://api.exchangeratesapi.io/latest
+- Initially there should be a button. Data is fetched when the button is clicked
+- "Loading" message/UI component should be shown while data is fetched
+- Error modal should be shown when data fetch fails
+- Application parts should be tested
+- React framework
+- Application state management using Redux framework
+- Pagination and styling is not necessary, table of exhange rates will be good enough
+
+# Implementation details
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -27,18 +44,28 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Third-party [npm](https://www.npmjs.com/) packages
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- [moment.js](https://www.npmjs.com/package/moment) for parsing and formattind dates
+- [numeral.js](https://www.npmjs.com/package/numeral) for formattind numbers
+- [normalize.css](https://www.npmjs.com/package/normalize.css) for CSS reset
+- [prop-types](https://www.npmjs.com/package/prop-types) for runtime type checking for React props.
+- [react-modal](https://www.npmjs.com/package/react-modal) as modal dialog component for displaying errors
+- [redux-thunk](https://www.npmjs.com/package/redux-thunk) for asynchronous actions
+- [reduce-reducers](https://www.npmjs.com/package/reduce-reducers) to reduce multiple reducers into a single reducer from left to right
+- [node-sass](https://www.npmjs.com/package/node-sass) was used to enable [SCSS](https://sass-lang.com/) language support in this project.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Testing
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+All React componenets were tested. All Redux action creatots, reducers and selectors were tested.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- [Jest](https://jestjs.io/) was used as unit tests framework.
+- [redux-mock-store](https://www.npmjs.com/package/redux-mock-store) was used to mock store for testing redux async action creators and middleware.
+- For React component testing were used following [npm](https://www.npmjs.com/) packages: [enzyme](https://www.npmjs.com/package/enzyme), [enzyme-adapter-react-16](https://www.npmjs.com/package/enzyme-adapter-react-16), [jest-enzyme](https://www.npmjs.com/package/jest-enzyme), [react-test-renderer](https://www.npmjs.com/package/react-test-renderer).
+- [jest-fetch-mock](https://www.npmjs.com/package/jest-fetch-mock) was used to mock [fetch API](https://developer.mozilla.org/ru/docs/Web/API/Fetch_API).
 
-## Learn More
+## IDE, ESLint and Prettier
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [Visual Studio Code](https://code.visualstudio.com/) was used as IDE.
+- [ESLint](https://www.npmjs.com/package/eslint) is already included in [Create React App](https://github.com/facebook/create-react-app) template. Only few settings were changes for this project in `.eslintrc` file.
+- [Prettier](https://github.com/prettier/prettier) was used for code formatting in [Visual Studio Code](https://code.visualstudio.com/) and [ESLint](https://www.npmjs.com/package/eslint) plugin [eslint-plugin-prettier](https://www.npmjs.com/package/eslint-plugin-prettier) was installed which allows Prettier violations to be reported as ESLint errors. All other settings for [Prettier](https://github.com/prettier/prettier) were default.

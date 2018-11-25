@@ -6,12 +6,23 @@ import {
 } from "./currencyRatesActionTypes";
 import { isCurrencyRatesLoading } from "../../selectors/currencyRatesSelectors";
 
-const setCurrencyRates = ({ rates, date, base }) => ({
-  type: SET_CURRENCY_RATES,
-  rates,
-  date,
-  base
-});
+const setCurrencyRates = ({ rates, date, base }) => {
+  const momentDate = moment.utc(date, "YYYY-MM-DD", true);
+  if (!momentDate.isValid()) {
+    throw new Error(`Conversion error: cannot convert '${date}' to Date`);
+  }
+  Object.values(rates).forEach(rate => {
+    if (typeof rate !== "number") {
+      throw new Error(`Conversion error: rate is not a number ${rate}`);
+    }
+  });
+  return {
+    type: SET_CURRENCY_RATES,
+    rates,
+    date: momentDate.toDate(),
+    base
+  };
+};
 
 const startLoadingCurrencyRates = () => ({
   type: START_LOADING_CURRENCY_RATES
@@ -35,16 +46,7 @@ const loadCurrencyRates = () => {
     try {
       const response = await fetch(FETCH_URL);
       const { date, base, rates } = await response.json();
-      const momentDate = moment(date);
-      if (!momentDate.isValid()) {
-        throw new Error(`Invalid date: ${date}`);
-      }
-      Object.values(rates).forEach(rate => {
-        if (typeof rate !== "number") {
-          throw new Error(`Conversion error: rate is not a number ${rate}`);
-        }
-      });
-      dispatch(setCurrencyRates({ date: momentDate.toDate(), base, rates }));
+      dispatch(setCurrencyRates({ date, base, rates }));
     } catch (error) {
       dispatch(setCurrencyRatesLoadingError(error));
     }
