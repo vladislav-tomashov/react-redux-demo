@@ -69,3 +69,7 @@ All React componenets were tested. All Redux action creatots, reducers and selec
 - [Visual Studio Code](https://code.visualstudio.com/) was used as IDE.
 - [ESLint](https://www.npmjs.com/package/eslint) is already included in [Create React App](https://github.com/facebook/create-react-app) template. Only few settings were changes for this project in `.eslintrc` file.
 - [Prettier](https://github.com/prettier/prettier) was used for code formatting in [Visual Studio Code](https://code.visualstudio.com/) and [ESLint](https://www.npmjs.com/package/eslint) plugin [eslint-plugin-prettier](https://www.npmjs.com/package/eslint-plugin-prettier) was installed which allows Prettier violations to be reported as ESLint errors. All other settings for [Prettier](https://github.com/prettier/prettier) were default.
+
+## Pull request demo
+
+This section is added to demonstrate pull-request
