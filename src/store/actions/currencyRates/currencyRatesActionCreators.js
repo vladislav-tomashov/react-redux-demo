@@ -4,7 +4,11 @@ import {
   SET_CURRENCY_RATES_LOADING_ERROR,
   START_LOADING_CURRENCY_RATES
 } from "./currencyRatesActionTypes";
-import { isCurrencyRatesLoading } from "../../selectors/currencyRatesSelectors";
+import {
+  isCurrencyRatesLoading,
+  getNextDate,
+  getCurrencyRatesData
+} from "../../selectors/currencyRatesSelectors";
 
 const setCurrencyRates = ({ rates, date, base }) => {
   const momentDate = moment.utc(date, "YYYY-MM-DD", true);
@@ -35,16 +39,22 @@ const setCurrencyRatesLoadingError = error => ({
 
 const FETCH_URL =
   process.env.REACT_APP_CURRENCY_RATES_URL ||
-  "https://api.exchangeratesapi.io/latest";
+  "https://api.exchangeratesapi.io/";
 
-const loadCurrencyRates = () => {
+const loadRates = getDateFromState => {
   return async (dispatch, getState) => {
     if (isCurrencyRatesLoading(getState())) {
       return;
     }
-    dispatch(startLoadingCurrencyRates());
+    const inputDate = getDateFromState(getState());
+    if (!inputDate) {
+      return;
+    }
+    const dateStr = moment(inputDate).format("YYYY-MM-DD");
+    const url = FETCH_URL + dateStr;
     try {
-      const response = await fetch(FETCH_URL);
+      dispatch(startLoadingCurrencyRates());
+      const response = await fetch(url);
       const { date, base, rates } = await response.json();
       dispatch(setCurrencyRates({ date, base, rates }));
     } catch (error) {
@@ -53,9 +63,38 @@ const loadCurrencyRates = () => {
   };
 };
 
+const loadForPreviousDay = () => {
+  return loadRates(state => {
+    const { date } = getCurrencyRatesData(state);
+    if (!date) {
+      return null;
+    }
+    return moment(date).add(-1, "days");
+  });
+};
+
+const loadForNextDay = () => {
+  return loadRates(state => {
+    const date = getNextDate(state);
+    if (!date) {
+      return null;
+    }
+    return date;
+  });
+};
+
+const loadCurrencyRates = () => {
+  return loadRates(state => {
+    const { date } = getCurrencyRatesData(state);
+    return date ? moment(date) : moment();
+  });
+};
+
 export {
   setCurrencyRates,
   startLoadingCurrencyRates,
   setCurrencyRatesLoadingError,
-  loadCurrencyRates
+  loadCurrencyRates,
+  loadForNextDay,
+  loadForPreviousDay
 };

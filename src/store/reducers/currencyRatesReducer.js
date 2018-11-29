@@ -3,13 +3,29 @@ import {
   SET_CURRENCY_RATES_LOADING_ERROR,
   SET_CURRENCY_RATES
 } from "../actions/currencyRates/currencyRatesActionTypes";
+import moment from "moment";
 
 const initialState = {
+  nextDate: null,
   rates: null,
   base: null,
   date: null,
   loading: false,
   error: null
+};
+
+const getNextBusinessDay = date => {
+  let days = 1;
+  const momentDate = date ? moment(date) : moment();
+  const diff = 7 - momentDate.weekday();
+  if (diff < 3) {
+    days = diff + 1;
+  }
+  const result = momentDate.add(days, "days");
+  if (result.isAfter(moment(), "day")) {
+    return null;
+  }
+  return result.toDate();
 };
 
 const currencyRatesReducer = (
@@ -27,6 +43,7 @@ const currencyRatesReducer = (
       };
     case SET_CURRENCY_RATES:
       return {
+        nextDate: getNextBusinessDay(date),
         base,
         date,
         rates,

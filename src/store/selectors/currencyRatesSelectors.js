@@ -6,9 +6,16 @@ const isCurrencyRatesLoading = state => getCurrencyRatesState(state).loading;
 
 const wasCurrencyRatesLoaded = state => !!getCurrencyRatesState(state).rates;
 
+const getNextDate = state => getCurrencyRatesState(state).nextDate;
+
 const getCurrencyRatesData = state => {
-  const { rates, date, base } = getCurrencyRatesState(state);
-  return { rates, date, base };
+  const { rates, date, base, loading, nextDate } = getCurrencyRatesState(state);
+  return { rates, date, base, loading, nextDate };
 };
 
-export { isCurrencyRatesLoading, wasCurrencyRatesLoaded, getCurrencyRatesData };
+export {
+  isCurrencyRatesLoading,
+  wasCurrencyRatesLoaded,
+  getCurrencyRatesData,
+  getNextDate
+};

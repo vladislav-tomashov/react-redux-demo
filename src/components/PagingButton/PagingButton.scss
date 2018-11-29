@@ -1,6 +1,6 @@
 @import "../../styles/settings";
 
-.LoadButton {
+.PagingButton {
   background: $blue;
   border: 2px solid $light-blue;
   color: white;
@@ -11,4 +11,5 @@
   padding: $s-size;
   text-decoration: none;
   min-width: 8rem;
+  margin: $xs-size;
 }

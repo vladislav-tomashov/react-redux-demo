@@ -1,5 +1,5 @@
 @import "../../styles/settings";
-@import "../LoadButton/LoadButton.scss";
+@import "../PagingButton/PagingButton.scss";
 
 .ErrorModal-overlay {
   align-items: center;
@@ -28,7 +28,7 @@
 }
 
 .ErrorModal-button {
-  @extend .LoadButton;
+  @extend .PagingButton;
   font-size: $font-size-small;
   padding: $xs-size;
 }
