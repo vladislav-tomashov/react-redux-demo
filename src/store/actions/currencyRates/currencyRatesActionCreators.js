@@ -136,7 +136,7 @@ const getInputForToday = state => ({
 const loadForToday = () => {
   return loadRates({
     getInput: getInputForToday,
-    transformOutput: transformOutputForTomorrow
+    transformOutput: transformOutputForYesterday
   });
 };
 
