@@ -1,12 +1,12 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { PagingButton } from "./PagingButton";
+import PagingButton from "./PagingButton";
 
 describe("PagingButton component", () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<PagingButton />);
+    wrapper = shallow(<PagingButton>Test</PagingButton>);
   });
 
   test("should render PagingButton correctly", () => {

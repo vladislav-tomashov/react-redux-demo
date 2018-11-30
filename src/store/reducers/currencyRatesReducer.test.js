@@ -1,12 +1,14 @@
 import {
   START_LOADING_CURRENCY_RATES,
-  SET_CURRENCY_RATES_LOADING_ERROR,
+  SET_CURRENCY_RATES_ERROR,
   SET_CURRENCY_RATES
 } from "../actions/currencyRates/currencyRatesActionTypes";
 import reducer from "./currencyRatesReducer";
+import moment from "moment";
 
 describe("currency rates reducer", () => {
   const initialState = {
+    nextDate: null,
     rates: null,
     base: null,
     date: null,
@@ -21,14 +23,14 @@ describe("currency rates reducer", () => {
       loading: true
     });
   });
-  test("should handle SET_CURRENCY_RATES_LOADING_ERROR", () => {
+  test("should handle SET_CURRENCY_RATES_ERROR", () => {
     const error = new Error("Test error");
     expect(
       reducer(
         {
           loading: true
         },
-        { type: SET_CURRENCY_RATES_LOADING_ERROR, error }
+        { type: SET_CURRENCY_RATES_ERROR, error }
       )
     ).toEqual({
       loading: false,
@@ -39,6 +41,7 @@ describe("currency rates reducer", () => {
     const rates = { USD: 12345 };
     const base = "ABC";
     const date = "2018-11-23";
+    const nextDate = moment("2018-11-26").toDate();
     expect(
       reducer(
         {
@@ -55,7 +58,8 @@ describe("currency rates reducer", () => {
       rates,
       base,
       date,
-      error: null
+      error: null,
+      nextDate
     });
   });
 });

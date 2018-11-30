@@ -7,12 +7,12 @@ describe("Paging component", () => {
 
   beforeEach(() => {
     const props = {
-      loadCurrencyRates: jest.fn(),
-      loadForNextDay: jest.fn(),
-      loadForPreviousDay: jest.fn(),
-      date,
-      loading,
-      nextDate
+      loadForToday: jest.fn(),
+      loadForTomorrow: jest.fn(),
+      loadForYesterday: jest.fn(),
+      loading: false,
+      date: null,
+      nextDate: null
     };
     wrapper = shallow(<Paging {...props} />);
   });
@@ -23,31 +23,47 @@ describe("Paging component", () => {
 
   test("should render Paging with 'loading' props correctly", () => {
     wrapper.setProps({
-      requestStatus: LOADING
+      loading: true
     });
     expect(wrapper).toMatchSnapshot();
   });
-  test("should render Paging with 'loaded' props correctly", () => {
+  test("should render Paging with 'date' props correctly", () => {
     wrapper.setProps({
-      requestStatus: LOADED
+      date: new Date()
     });
     expect(wrapper).toMatchSnapshot();
   });
   test("should render Paging with all props correctly", () => {
-    const makeRequest = jest.fn();
     wrapper.setProps({
-      requestStatus: LOADED,
-      makeRequest
+      date: new Date(),
+      nextDate: new Date()
     });
     expect(wrapper).toMatchSnapshot();
   });
-  test("should handle button click", () => {
-    const makeRequest = jest.fn();
+  test("should handle [Load rates] button click", () => {
+    const loadForToday = jest.fn();
     wrapper.setProps({
-      requestStatus: LOADED,
-      makeRequest
+      loadForToday
     });
-    wrapper.find("button").simulate("click");
-    expect(makeRequest).toBeCalledTimes(1);
+    wrapper.find("PagingButton").simulate("click");
+    expect(loadForToday).toBeCalledTimes(1);
+  });
+  test("should handle [Next] button click", () => {
+    const loadForTomorrow = jest.fn();
+    wrapper.setProps({
+      date: new Date(),
+      loadForTomorrow
+    });
+    wrapper.find({ onClick: loadForTomorrow }).simulate("click");
+    expect(loadForTomorrow).toBeCalledTimes(1);
+  });
+  test("should handle [Prevoius] button click", () => {
+    const loadForYesterday = jest.fn();
+    wrapper.setProps({
+      date: new Date(),
+      loadForYesterday
+    });
+    wrapper.find({ onClick: loadForYesterday }).simulate("click");
+    expect(loadForYesterday).toBeCalledTimes(1);
   });
 });

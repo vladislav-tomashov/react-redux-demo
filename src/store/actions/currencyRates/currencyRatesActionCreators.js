@@ -1,7 +1,7 @@
 import moment from "moment";
 import {
   SET_CURRENCY_RATES,
-  SET_CURRENCY_RATES_LOADING_ERROR,
+  SET_CURRENCY_RATES_ERROR,
   START_LOADING_CURRENCY_RATES
 } from "./currencyRatesActionTypes";
 import {
@@ -34,8 +34,8 @@ const startLoadingCurrencyRates = () => ({
   type: START_LOADING_CURRENCY_RATES
 });
 
-const setCurrencyRatesLoadingError = error => ({
-  type: SET_CURRENCY_RATES_LOADING_ERROR,
+const setCurrencyRatesError = error => ({
+  type: SET_CURRENCY_RATES_ERROR,
   error
 });
 
@@ -62,24 +62,26 @@ const loadRates = ({ getInput, transformOutput }) => {
       const { date, base, rates } = transformOutput({ input, output });
       dispatch(setCurrencyRates({ date, base, rates }));
     } catch (error) {
-      dispatch(setCurrencyRatesLoadingError(error));
+      dispatch(setCurrencyRatesError(error));
     }
   };
 };
 
-const getInputDateForPrevDay = state => {
+const getInputDateForYesterday = state => {
   const { date } = getCurrencyRatesData(state);
   if (!date) {
     return null;
   }
-  return moment(date).add(-1, "days");
+  return moment(date)
+    .add(-1, "days")
+    .startOf("day");
 };
 
-const getInputForPrevDay = state => ({
-  date: getInputDateForPrevDay(state)
+const getInputForYesterday = state => ({
+  date: getInputDateForYesterday(state)
 });
 
-const transformOutputForPrevDay = ({ output: { rates, date, base } }) => {
+const transformOutputForYesterday = ({ output: { rates, date, base } }) => {
   return {
     date,
     rates,
@@ -87,23 +89,23 @@ const transformOutputForPrevDay = ({ output: { rates, date, base } }) => {
   };
 };
 
-const loadForPreviousDay = () => {
+const loadForYesterday = () => {
   return loadRates({
-    getInput: getInputForPrevDay,
-    transformOutput: transformOutputForPrevDay
+    getInput: getInputForYesterday,
+    transformOutput: transformOutputForYesterday
   });
 };
 
-const getInputDateForNextDay = state => {
+const getInputDateForTomorrow = state => {
   const date = getNextDate(state);
   return date ? date : null;
 };
 
-const getInputForNextDay = state => ({
-  date: getInputDateForNextDay(state)
+const getInputForTomorrow = state => ({
+  date: getInputDateForTomorrow(state)
 });
 
-const transformOutputForNextDay = ({
+const transformOutputForTomorrow = ({
   input: { date },
   output: { rates: outputRates, date: outputDate, base }
 }) => {
@@ -115,34 +117,34 @@ const transformOutputForNextDay = ({
   };
 };
 
-const loadForNextDay = () => {
+const loadForTomorrow = () => {
   return loadRates({
-    getInput: getInputForNextDay,
-    transformOutput: transformOutputForNextDay
+    getInput: getInputForTomorrow,
+    transformOutput: transformOutputForTomorrow
   });
 };
 
-const getInputDateForCurrentDay = state => {
+const getInputDateForToday = state => {
   const { date } = getCurrencyRatesData(state);
-  return date ? moment(date) : moment();
+  return (date ? moment(date) : moment()).startOf("day");
 };
 
-const getInputForCurrentDay = state => ({
-  date: getInputDateForCurrentDay(state)
+const getInputForToday = state => ({
+  date: getInputDateForToday(state)
 });
 
-const loadCurrencyRates = () => {
+const loadForToday = () => {
   return loadRates({
-    getInput: getInputForCurrentDay,
-    transformOutput: transformOutputForNextDay
+    getInput: getInputForToday,
+    transformOutput: transformOutputForTomorrow
   });
 };
 
 export {
   setCurrencyRates,
   startLoadingCurrencyRates,
-  setCurrencyRatesLoadingError,
-  loadCurrencyRates,
-  loadForNextDay,
-  loadForPreviousDay
+  setCurrencyRatesError,
+  loadForToday,
+  loadForTomorrow,
+  loadForYesterday
 };

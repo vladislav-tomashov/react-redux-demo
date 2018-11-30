@@ -1,3 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PagingButton component should render PagingButton correctly 1`] = `undefined`;
+exports[`PagingButton component should render PagingButton correctly 1`] = `
+<button
+  className="PagingButton"
+>
+  Test
+</button>
+`;

@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Paging component should render Paging correctly 1`] = `
+<span>
+  <PagingButton
+    disabled={false}
+    onClick={[MockFunction]}
+  >
+    Load rates
+  </PagingButton>
+</span>
+`;
+
+exports[`Paging component should render Paging with 'date' props correctly 1`] = `
+<span>
+  <PagingButton
+    disabled={false}
+    onClick={[MockFunction]}
+  >
+    Previous
+  </PagingButton>
+  <PagingButton
+    disabled={false}
+    onClick={[MockFunction]}
+  >
+    Refresh rates
+  </PagingButton>
+  <PagingButton
+    disabled={true}
+    onClick={[MockFunction]}
+  >
+    Next
+  </PagingButton>
+</span>
+`;
+
+exports[`Paging component should render Paging with 'loading' props correctly 1`] = `
+<span>
+  <PagingButton
+    disabled={true}
+    onClick={[MockFunction]}
+  >
+    Load rates
+  </PagingButton>
+</span>
+`;
+
+exports[`Paging component should render Paging with all props correctly 1`] = `
+<span>
+  <PagingButton
+    disabled={false}
+    onClick={[MockFunction]}
+  >
+    Previous
+  </PagingButton>
+  <PagingButton
+    disabled={false}
+    onClick={[MockFunction]}
+  >
+    Refresh rates
+  </PagingButton>
+  <PagingButton
+    disabled={false}
+    onClick={[MockFunction]}
+  >
+    Next
+  </PagingButton>
+</span>
+`;

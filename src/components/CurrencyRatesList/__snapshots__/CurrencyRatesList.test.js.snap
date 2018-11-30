@@ -1,5 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`CurrencyRatesList component should render CurrencyRatesList correctly when there is no rates 1`] = `
+<div
+  className="CurrencyRates"
+>
+  <div
+    className="CurrencyRates-heading"
+  >
+    Currency rates
+  </div>
+  <span>
+    No rates found for 
+    December 31, 2018
+    .
+  </span>
+</div>
+`;
+
 exports[`CurrencyRatesList component should render CurrencyRatesList correctly with provided values 1`] = `
 <div
   className="CurrencyRates"

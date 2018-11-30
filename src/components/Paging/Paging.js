@@ -2,34 +2,34 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import {
-  loadCurrencyRates,
-  loadForNextDay,
-  loadForPreviousDay
+  loadForToday,
+  loadForTomorrow,
+  loadForYesterday
 } from "../../store/actions/currencyRates/currencyRatesActionCreators";
 import { getCurrencyRatesData } from "../../store/selectors/currencyRatesSelectors";
 import PagingButton from "../PagingButton/PagingButton";
 
 const Paging = ({
-  loadCurrencyRates,
-  loadForNextDay,
-  loadForPreviousDay,
+  loadForToday,
+  loadForTomorrow,
+  loadForYesterday,
   date,
   loading,
   nextDate
 }) => {
   const prevButton = date ? (
-    <PagingButton disabled={loading} onClick={loadForPreviousDay}>
+    <PagingButton disabled={loading} onClick={loadForYesterday}>
       Previous
     </PagingButton>
   ) : null;
   const nextButton = date ? (
-    <PagingButton disabled={loading || !nextDate} onClick={loadForNextDay}>
+    <PagingButton disabled={loading || !nextDate} onClick={loadForTomorrow}>
       Next
     </PagingButton>
   ) : null;
   const label = date ? "Refresh rates" : "Load rates";
   const refreshButton = (
-    <PagingButton disabled={loading} onClick={loadCurrencyRates}>
+    <PagingButton disabled={loading} onClick={loadForToday}>
       {label}
     </PagingButton>
   );
@@ -44,9 +44,9 @@ const Paging = ({
 };
 
 Paging.propTypes = {
-  loadCurrencyRates: PropTypes.func.isRequired,
-  loadForNextDay: PropTypes.func.isRequired,
-  loadForPreviousDay: PropTypes.func.isRequired,
+  loadForToday: PropTypes.func.isRequired,
+  loadForTomorrow: PropTypes.func.isRequired,
+  loadForYesterday: PropTypes.func.isRequired,
   date: PropTypes.instanceOf(Date),
   nextDate: PropTypes.instanceOf(Date),
   loading: PropTypes.bool.isRequired
@@ -62,9 +62,9 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  loadCurrencyRates,
-  loadForNextDay,
-  loadForPreviousDay
+  loadForToday,
+  loadForTomorrow,
+  loadForYesterday
 };
 
 const ConnectedPaging = connect(

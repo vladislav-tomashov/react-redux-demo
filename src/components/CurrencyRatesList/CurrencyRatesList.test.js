@@ -28,4 +28,16 @@ describe("CurrencyRatesList component", () => {
     });
     expect(wrapper).toMatchSnapshot();
   });
+
+  test("should render CurrencyRatesList correctly when there is no rates", () => {
+    const date = moment("2018-12-31").toDate();
+    const base = "ABC";
+    const rates = null;
+    wrapper.setProps({
+      date,
+      base,
+      rates
+    });
+    expect(wrapper).toMatchSnapshot();
+  });
 });

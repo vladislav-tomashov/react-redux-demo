@@ -4,13 +4,13 @@ import thunk from "redux-thunk";
 import {
   setCurrencyRates,
   startLoadingCurrencyRates,
-  setCurrencyRatesLoadingError,
-  loadCurrencyRates
+  setCurrencyRatesError,
+  loadForToday
 } from "./currencyRatesActionCreators";
 import {
   SET_CURRENCY_RATES,
   START_LOADING_CURRENCY_RATES,
-  SET_CURRENCY_RATES_LOADING_ERROR
+  SET_CURRENCY_RATES_ERROR
 } from "./currencyRatesActionTypes";
 import {
   CURRENCY_RATES_REDUCER,
@@ -97,9 +97,9 @@ describe("currency rates sync actions", () => {
 
   test("should create an error action as a result of currency rates loading", () => {
     const error = new Error("test error");
-    const action = setCurrencyRatesLoadingError(error);
+    const action = setCurrencyRatesError(error);
     expect(action).toEqual({
-      type: SET_CURRENCY_RATES_LOADING_ERROR,
+      type: SET_CURRENCY_RATES_ERROR,
       error
     });
   });
@@ -117,19 +117,44 @@ describe("currency rates async actions", () => {
     fetch.resetMocks();
   });
 
-  test("should fetch currency rates from URL and create actions for that", async () => {
+  test("should load currency rates for today if rates for today exist", async () => {
     expect.assertions(1);
 
-    fetch.mockResponseOnce(JSON.stringify(testDataCurrencyRates));
+    const response = {
+      ...testDataCurrencyRates,
+      date: moment().format("YYYY-MM-DD")
+    };
 
-    const { rates, date, base } = testDataCurrencyRates;
+    fetch.mockResponseOnce(JSON.stringify(response));
+
+    const { rates, base, date } = response;
     const expectedActions = [
       { type: START_LOADING_CURRENCY_RATES },
-      { type: SET_CURRENCY_RATES, rates, base, date: moment.utc(date).toDate() }
+      { type: SET_CURRENCY_RATES, rates, base, date: moment(date).toDate() }
     ];
     const store = mockStore(storeInitialState);
 
-    await store.dispatch(loadCurrencyRates());
+    await store.dispatch(loadForToday());
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
+
+  test("should set currency rates to null if rates for today does not exist", async () => {
+    expect.assertions(1);
+
+    const response = testDataCurrencyRates;
+
+    fetch.mockResponseOnce(JSON.stringify(response));
+
+    const date = moment(moment().format("YYYY-MM-DD")).toDate();
+    const { base } = response;
+    const expectedActions = [
+      { type: START_LOADING_CURRENCY_RATES },
+      { type: SET_CURRENCY_RATES, rates: null, base, date }
+    ];
+    const store = mockStore(storeInitialState);
+
+    await store.dispatch(loadForToday());
 
     expect(store.getActions()).toEqual(expectedActions);
   });
@@ -142,11 +167,11 @@ describe("currency rates async actions", () => {
 
     const expectedActions = [
       { type: START_LOADING_CURRENCY_RATES },
-      { type: SET_CURRENCY_RATES_LOADING_ERROR, error }
+      { type: SET_CURRENCY_RATES_ERROR, error }
     ];
     const store = mockStore(storeInitialState);
 
-    await store.dispatch(loadCurrencyRates());
+    await store.dispatch(loadForToday());
 
     expect(store.getActions()).toEqual(expectedActions);
   });

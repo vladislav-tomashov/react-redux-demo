@@ -1,5 +1,5 @@
 import {
-  SET_CURRENCY_RATES_LOADING_ERROR,
+  SET_CURRENCY_RATES_ERROR,
   SET_CURRENCY_RATES
 } from "../actions/currencyRates/currencyRatesActionTypes";
 import { SET_ERROR, RESET_ERROR } from "../actions/errors/errorsActionTypes";
@@ -16,7 +16,7 @@ describe("combined currency rates with errors reducer", () => {
     const initialState = undefined;
     expect(reducer(undefined, {})).toEqual(initialState);
   });
-  test("should handle SET_CURRENCY_RATES_LOADING_ERROR", () => {
+  test("should handle SET_CURRENCY_RATES_ERROR", () => {
     const initialRatesState = {
       loading: true
     };
@@ -26,7 +26,7 @@ describe("combined currency rates with errors reducer", () => {
     };
     const error = new Error("Test error");
     const ratesState = ratesReducer(initialRatesState, {
-      type: SET_CURRENCY_RATES_LOADING_ERROR,
+      type: SET_CURRENCY_RATES_ERROR,
       error
     });
     const errorState = errorsReducer(initialErrorsState, {
@@ -39,7 +39,7 @@ describe("combined currency rates with errors reducer", () => {
           [CURRENCY_RATES_REDUCER]: initialRatesState,
           [ERRORS_REDUCER]: initialErrorsState
         },
-        { type: SET_CURRENCY_RATES_LOADING_ERROR, error }
+        { type: SET_CURRENCY_RATES_ERROR, error }
       )
     ).toEqual({
       [CURRENCY_RATES_REDUCER]: ratesState,

@@ -48,13 +48,12 @@ describe("currency rates selectors", () => {
     const ratesData = {
       rates: { USD: 123 },
       base: "ABC",
-      date: "2018-07-30"
+      date: "2018-07-30",
+      loading: false,
+      nextDate: new Date()
     };
     const state = {
-      [CURRENCY_RATES_REDUCER]: {
-        ...ratesData,
-        loading: false
-      }
+      [CURRENCY_RATES_REDUCER]: ratesData
     };
     expect(getCurrencyRatesData(state)).toEqual(ratesData);
   });
