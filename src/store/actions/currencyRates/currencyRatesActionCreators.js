@@ -59,8 +59,7 @@ const loadRates = ({ getInput, transformOutput }) => {
       dispatch(startLoadingCurrencyRates());
       const response = await fetch(url);
       const output = await response.json();
-      const { date, base, rates } = transformOutput({ input, output });
-      dispatch(setCurrencyRates({ date, base, rates }));
+      dispatch(setCurrencyRates(transformOutput({ input, output })));
     } catch (error) {
       dispatch(setCurrencyRatesError(error));
     }

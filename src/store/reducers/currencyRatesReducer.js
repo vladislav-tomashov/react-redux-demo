@@ -42,8 +42,9 @@ const currencyRatesReducer = (
         error
       };
     case SET_CURRENCY_RATES:
+      const nextDate = getNextBusinessDay(date);
       return {
-        nextDate: getNextBusinessDay(date),
+        nextDate,
         base,
         date,
         rates,
