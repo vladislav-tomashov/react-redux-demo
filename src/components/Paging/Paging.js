@@ -22,8 +22,8 @@ const Paging = ({
       Previous
     </PagingButton>
   ) : null;
-  const nextButton = nextDate ? (
-    <PagingButton disabled={loading} onClick={loadForNextDay}>
+  const nextButton = date ? (
+    <PagingButton disabled={loading || !nextDate} onClick={loadForNextDay}>
       Next
     </PagingButton>
   ) : null;

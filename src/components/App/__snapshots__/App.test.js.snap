@@ -8,7 +8,7 @@ exports[`App component renders without crashing 1`] = `
     className="App"
   >
     <p>
-      <Connect(LoadButton) />
+      <Connect(Paging) />
     </p>
     <Connect(CurrencyRatesList) />
   </div>

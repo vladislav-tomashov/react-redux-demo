@@ -15,11 +15,13 @@ const setCurrencyRates = ({ rates, date, base }) => {
   if (!momentDate.isValid()) {
     throw new Error(`Conversion error: cannot convert '${date}' to Date`);
   }
-  Object.values(rates).forEach(rate => {
-    if (typeof rate !== "number") {
-      throw new Error(`Conversion error: rate is not a number ${rate}`);
-    }
-  });
+  if (rates) {
+    Object.values(rates).forEach(rate => {
+      if (typeof rate !== "number") {
+        throw new Error(`Conversion error: rate "${rate}" is not a number`);
+      }
+    });
+  }
   return {
     type: SET_CURRENCY_RATES,
     rates,
@@ -41,12 +43,13 @@ const FETCH_URL =
   process.env.REACT_APP_CURRENCY_RATES_URL ||
   "https://api.exchangeratesapi.io/";
 
-const loadRates = getDateFromState => {
+const loadRates = ({ getInput, transformOutput }) => {
   return async (dispatch, getState) => {
     if (isCurrencyRatesLoading(getState())) {
       return;
     }
-    const inputDate = getDateFromState(getState());
+    const input = getInput(getState());
+    const { date: inputDate } = input;
     if (!inputDate) {
       return;
     }
@@ -55,7 +58,8 @@ const loadRates = getDateFromState => {
     try {
       dispatch(startLoadingCurrencyRates());
       const response = await fetch(url);
-      const { date, base, rates } = await response.json();
+      const output = await response.json();
+      const { date, base, rates } = transformOutput({ input, output });
       dispatch(setCurrencyRates({ date, base, rates }));
     } catch (error) {
       dispatch(setCurrencyRatesLoadingError(error));
@@ -63,30 +67,74 @@ const loadRates = getDateFromState => {
   };
 };
 
+const getInputDateForPrevDay = state => {
+  const { date } = getCurrencyRatesData(state);
+  if (!date) {
+    return null;
+  }
+  return moment(date).add(-1, "days");
+};
+
+const getInputForPrevDay = state => ({
+  date: getInputDateForPrevDay(state)
+});
+
+const transformOutputForPrevDay = ({ output: { rates, date, base } }) => {
+  return {
+    date,
+    rates,
+    base
+  };
+};
+
 const loadForPreviousDay = () => {
-  return loadRates(state => {
-    const { date } = getCurrencyRatesData(state);
-    if (!date) {
-      return null;
-    }
-    return moment(date).add(-1, "days");
+  return loadRates({
+    getInput: getInputForPrevDay,
+    transformOutput: transformOutputForPrevDay
   });
+};
+
+const getInputDateForNextDay = state => {
+  const date = getNextDate(state);
+  return date ? date : null;
+};
+
+const getInputForNextDay = state => ({
+  date: getInputDateForNextDay(state)
+});
+
+const transformOutputForNextDay = ({
+  input: { date },
+  output: { rates: outputRates, date: outputDate, base }
+}) => {
+  const rates = moment(date).isAfter(outputDate, "day") ? null : outputRates;
+  return {
+    date,
+    rates,
+    base
+  };
 };
 
 const loadForNextDay = () => {
-  return loadRates(state => {
-    const date = getNextDate(state);
-    if (!date) {
-      return null;
-    }
-    return date;
+  return loadRates({
+    getInput: getInputForNextDay,
+    transformOutput: transformOutputForNextDay
   });
 };
 
+const getInputDateForCurrentDay = state => {
+  const { date } = getCurrencyRatesData(state);
+  return date ? moment(date) : moment();
+};
+
+const getInputForCurrentDay = state => ({
+  date: getInputDateForCurrentDay(state)
+});
+
 const loadCurrencyRates = () => {
-  return loadRates(state => {
-    const { date } = getCurrencyRatesData(state);
-    return date ? moment(date) : moment();
+  return loadRates({
+    getInput: getInputForCurrentDay,
+    transformOutput: transformOutputForNextDay
   });
 };
 

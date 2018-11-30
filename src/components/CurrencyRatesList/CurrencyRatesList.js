@@ -7,14 +7,12 @@ import CurrencyRatesItem from "../CurrencyRatesItem/CurrencyRatesItem";
 import "./CurrencyRatesList.scss";
 
 const CurrencyRatesList = ({ date, base, rates } = {}) => {
-  const content = !date ? (
-    <span>Please press [Load rates] button to get currency rates</span>
-  ) : (
+  const formattedDate = moment(date).format("LL");
+  const ratesBody = rates ? (
     <React.Fragment>
-      <div className="CurrencyRates-heading">Currency rates</div>
       <div className="CurrencyRates-info">
         <span>Currency rates for:</span>
-        <span>{moment(date).format("LL")}</span>
+        <span>{formattedDate}</span>
       </div>
       <div className="CurrencyRates-info">
         <span>Base currency:</span>
@@ -29,6 +27,16 @@ const CurrencyRatesList = ({ date, base, rates } = {}) => {
           return <CurrencyRatesItem key={currency} {...{ currency, rate }} />;
         })}
       </div>
+    </React.Fragment>
+  ) : (
+    <span>No rates found for {formattedDate}.</span>
+  );
+  const content = !date ? (
+    <span>Please press [Load rates] button to get currency rates</span>
+  ) : (
+    <React.Fragment>
+      <div className="CurrencyRates-heading">Currency rates</div>
+      {ratesBody}
     </React.Fragment>
   );
   return <div className="CurrencyRates">{content}</div>;
